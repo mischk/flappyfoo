@@ -15,7 +15,6 @@
 * obstacle disappear smoother
 * add splash screen
 * add high score
-* add music
 * rewrite code using the pygame methods (for collision)
 * clean up code
 '''
