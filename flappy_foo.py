@@ -5,6 +5,7 @@
 
 # background image by Alucard (http://opengameart.org/users/alucard)
 # plane image by kenney (http://opengameart.org/users/kenney)
+# music by Bass Assassin (http://freemusicarchive.org/music/Bass_Assassin/Peony_Lantern_Split_EP/8bitDetective)
 
 # v0.1
 
@@ -14,7 +15,6 @@
 * obstacle disappear smoother
 * add splash screen
 * add high score
-* add music
 * rewrite code using the pygame methods (for collision)
 * clean up code
 '''
@@ -47,7 +47,9 @@ screen = pygame.display.set_mode(size)
 background_image = pygame.transform.scale(pygame.image.load("media/city_background_night.png").convert(), [8000, 500])
 plane = pygame.transform.scale(pygame.image.load("media/planeBlue1.png").convert_alpha(), [70, 50])
 
-
+# load and start music:
+pygame.mixer.music.load("media/soundtrack.mp3")
+pygame.mixer.music.play()
 
 pygame.display.set_caption("Flappy foo")
 
@@ -128,7 +130,7 @@ def create_obstacles():
     upper_height = random.randrange(size[1] / 3, size[1] / 3  * 2) 
 
     obstacles.add(obstacle(BLACK, [size[0], 0, 80, upper_height], True))
-    obstacles.add(obstacle(BLACK, [size[0], upper_height + 200, 80, size[1]], False)) # 200 für yunus eingestellt
+    obstacles.add(obstacle(BLACK, [size[0], upper_height + 100, 80, size[1]], False)) 
 
 def discard_obstacles():
     for obstacle in set(obstacles):
@@ -177,7 +179,10 @@ while not done:
                 rect_velocity = 0
         
               
-            
+    # if music is off, play again
+    if not pygame.mixer.music.get_busy():
+        pygame.mixer.music.rewind()
+        pygame.mixer.music.play()
                 
 
     # clear screen, set it to white:
@@ -209,8 +214,9 @@ while not done:
     # draw things on the screen:
     
 
-    # background image
+    # background image; start music
     screen.blit(background_image, [back_pos_x, 0])
+
     if back_pos_x >= -7300:
         back_pos_x -= 1
     else:
