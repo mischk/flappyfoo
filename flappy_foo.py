@@ -6,6 +6,7 @@
 # background image by Alucard (http://opengameart.org/users/alucard)
 # plane image by kenney (http://opengameart.org/users/kenney)
 
+# v0.1
 
 ''' Todo:
 * add plane animation
